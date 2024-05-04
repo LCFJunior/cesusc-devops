@@ -1,14 +1,13 @@
 const express = require('express');
 const app = express();
-const path = require('path');
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-app.use(express.static(path.join(__dirname, 'views')));
+let test
 
-app.get('/index', (req, res) => {
-    res.sendFile('views/index.html', { root: __dirname })
-})
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/views/index.html' )
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
