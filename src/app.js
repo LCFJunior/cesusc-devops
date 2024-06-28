@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
+// Não é necessário redeclarar __dirname, apenas use-o diretamente
 // Determina o diretório base usando process.cwd() para compatibilidade
 const viewsPath = path.join(__dirname, 'views');
 app.use(express.static(viewsPath));
