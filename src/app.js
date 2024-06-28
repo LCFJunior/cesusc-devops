@@ -1,16 +1,19 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
 
 const app = express();
 const PORT = 3000;
 
-app.use(express.static(path.join(__dirname, 'views')));
+// Serve static files from the 'views' directory
+const viewsPath = new URL('.', import.meta.url).pathname;
+app.use(express.static(path.join(viewsPath, 'views')));
 
+// Serve the index.html file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+    res.sendFile(path.join(viewsPath, 'views', 'index.html'));
 });
 
-module.exports = app;
+export default app;
 
 if (require.main === module) {
     app.listen(PORT, '0.0.0.0', () => {
