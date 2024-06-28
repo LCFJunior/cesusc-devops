@@ -11,6 +11,12 @@
       "no-console": "off", // opcional: desativa a regra de não usar console
       "no-unused-vars": ["error", { "args": "none" }],
       "no-undef": "error"
-    }
-  }
+    },
+    "globals": {
+      "__dirname": true
+    },
+    "plugins": [
+      "node"
+  ]
+}
   
