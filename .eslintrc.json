@@ -1,0 +1,16 @@
+{
+    "env": {
+      "node": true,
+      "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 12
+    },
+    "rules": {
+      "no-console": "off", // opcional: desativa a regra de não usar console
+      "no-unused-vars": ["error", { "args": "none" }],
+      "no-undef": "error"
+    }
+  }
+  
