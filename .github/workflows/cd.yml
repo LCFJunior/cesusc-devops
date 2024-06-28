@@ -25,8 +25,8 @@ jobs:
       - name: Install dependencies
         run: npm install # necessário caso haja alteração nas dependências do projeto
 
-      - name: Run ESLint
-        run: npm run lint
+      - name: Run Jest
+        run: npm test
         
       - name: Deploy the application
         uses: burnett01/rsync-deployments@5.1
@@ -37,5 +37,3 @@ jobs:
           remote_host: 54.233.195.195 # Aqui vai o IP fixo da instância EC2
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
-11_exemplo_workflow_cd.yml
-Exibindo 11_exemplo_workflow_cd.yml…
