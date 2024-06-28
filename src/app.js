@@ -4,16 +4,17 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-const __dirname = path.resolve();
-// Serve static files from the 'views' directory
-const viewsPath = __dirname;
-app.use(express.static(path.join(viewsPath, 'views')));
+// Não é necessário redeclarar __dirname, apenas use-o diretamente
+// Determina o diretório base usando process.cwd() para compatibilidade
+const viewsPath = path.join(__dirname, 'views');
+app.use(express.static(viewsPath));
 
-// Serve the index.html file
+// Servir o arquivo index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'views', 'index.html'));
+    res.sendFile(path.join(viewsPath, 'index.html'));
 });
 
+// Iniciar o servidor apenas se este arquivo for o principal
 if (require.main === module) {
     app.listen(PORT, '0.0.0.0', () => {
         console.log(`Servidor rodando em http://0.0.0.0:${PORT}`);

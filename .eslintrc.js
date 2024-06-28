@@ -17,6 +17,9 @@ module.exports = {
     plugins: [
         'node',
     ],
-    // Outras configurações do ESLint aqui...
-  };
+    rules: {
+        'node/no-unsupported-features/es-syntax': ['error', { allowModules: ['url'] }],
+        'node/no-missing-import': ['error', { tryExtensions: ['.js', '.json', '.node'] }]
+  }
+}
   
