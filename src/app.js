@@ -1,5 +1,5 @@
-import express from 'express';
-import path from 'path';
+const express = require('express')
+const path = require('path')
 
 const app = express();
 const PORT = 3000;
@@ -13,10 +13,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(viewsPath, 'views', 'index.html'));
 });
 
-export default app;
 
 if (require.main === module) {
     app.listen(PORT, '0.0.0.0', () => {
         console.log(`Servidor rodando em http://0.0.0.0:${PORT}`);
     });
 }
+
+module.exports = app;
