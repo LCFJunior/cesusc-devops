@@ -1,11 +1,10 @@
-import express from 'express';
-import { fileURLToPath } from 'url';
-import path from 'path';
+const express = require('express');
+const path = require('path');
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = 3000;
 
+const __dirname = path.resolve();
 // Serve static files from the 'views' directory
 const viewsPath = __dirname;
 app.use(express.static(path.join(viewsPath, 'views')));
@@ -21,4 +20,4 @@ if (require.main === module) {
     });
 }
 
-export default app;
+module.exports = app;
