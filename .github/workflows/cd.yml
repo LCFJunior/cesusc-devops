@@ -37,4 +37,3 @@ jobs:
           remote_host: 54.233.195.195 # Aqui vai o IP fixo da instância EC2
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
-          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
