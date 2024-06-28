@@ -1,57 +1,35 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: CD
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  build:
-    # The type of runner that the job will run on
+  deploy:
+
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
         with:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install # necessário caso haja alteração nas dependências do projeto
 
-      - name: Run ESLint
-        run: npm run lint
-
-      - name: Run Jest
-        run: npm test
-          
-  delivery:
-    runs-on: ubuntu-latest
-    needs: build
-    if: ${{ success() }}
-    steps:
-      - uses: actions/checkout@v4
+      - name: Deploy the application
+        uses: burnett01/rsync-deployments@5.1
         with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-
-      - name: Set up Git
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-      
-      - name: Merge to main
-        run: |
-          git fetch
-          git checkout main
-          git merge develop --allow-unrelated-histories --no-edit
-          git push origin main
+          switches: -avzr --delete
+          path: ./*
+          remote_path: /opt/cesusc-devops/ # Pasta onde está o nosso projeto
+          remote_host: 18.231.236.9 # Aqui vai o IP fixo da instância EC2
+          remote_user: ubuntu
+          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
